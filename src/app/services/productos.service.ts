@@ -8,8 +8,8 @@ export class ProductosService {
   constructor(private _http : Http) {}
 
   getProductos(){
-    return this._http.get('./productos.json')
+    return this._http.get('https://raw.githubusercontent.com/sergiosegovia/rappi/master/src/app/models/productos.json')
                      .map( res => res.json());
-  }
+  }                
 
 }

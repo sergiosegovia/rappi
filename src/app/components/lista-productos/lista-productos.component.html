@@ -1,7 +1,33 @@
-<p>
-  lista-productos works!
-</p>
+<div class="filters">
+  <div class="container">
+    <button (click)="getBestSellers(productos.products)">Mas vendidos</button>
+    <button (click)="getNotAvailables(productos.products)">Agotados</button>
+    <button (click)="getAvailables(productos.products)">Disponibles</button>
+  </div>
+</div>
 
-<ul>
-  <li *ngFor="let producto of productos.products">{{ producto.price}}</li>
-</ul>
+
+<div class="row producto-lista">
+  <div *ngFor="let producto of productos.products" class="producto col-xs-6 col-sm-3"
+  [class.best-seller]="producto.best_seller === true"
+  [class.not-best-seller]="producto.best_seller === false"
+  [class.available]="producto.available === true"
+  [class.not-available]="producto.available === false">
+    <figure class="producto-img">
+      <img src="{{ producto.img }}" alt="{{ producto.name }}" class="img-responsive">
+    </figure>
+    <div class="producto-name">
+      <h3>{{ producto.name }}</h3>
+    </div>
+    <span class="producto-price">
+      {{ producto.price | currency:'USD':true }}
+    </span>
+    <span *ngIf="producto.best_seller === true && producto.available === true" class="badge producto-best-seller">
+      BS
+    </span>
+    <span *ngIf="producto.available === false" class="badge producto-no-disponible">
+      OS
+    </span>
+    <button>Agregar al carrito</button>
+  </div>
+</div>
